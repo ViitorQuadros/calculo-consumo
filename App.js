@@ -11,36 +11,47 @@ const App = () => {
     const mediaCalculada = quilometragem / litros;
     setMedia(mediaCalculada.toFixed(2));
 
-    if (mediaCalculada >= 15) {
+    if (mediaCalculada >= 12) {
       setClassificacao('Ótimo');
-    } else if (mediaCalculada >= 12) {
+    } else if (mediaCalculada <= 10 && mediaCalculada >= 10) {
       setClassificacao('Bom');
-    } else if (mediaCalculada >= 10) {
+    } else if (mediaCalculada <= 8) {
       setClassificacao('Regular');
-    } else {
-      setClassificacao('Ruim');
+    } else if(mediaCalculada <= 4){
+      setClassificacao('ruim')
+    }
+     else {
+      setClassificacao('Carro nem ligou');
     }
   };
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <TextInput
-        placeholder="Quilometragem"
+      
+      <h1 style={{fontSize: 15}}>
+        quilometragem: <TextInput
+        
         keyboardType="numeric"
         onChangeText={setQuilometragem}
         value={quilometragem}
       />
+      </h1>
+      
+      <h1 style={{fontSize: 15}}>
+        Litros:
       <TextInput
-        placeholder="Litros"
         keyboardType="numeric"
         onChangeText={setLitros}
         value={litros}
       />
+</h1>
+
+      
       <Button title="Calcular" onPress={calcularMedia} />
       {media > 0 && (
         <View>
-          <Text>Média de consumo: {media} km/l</Text>
-          <Text>Classificação: {classificacao}</Text>
+          <Text>O veiculo está fazendo: {media}  por km/l de combustivel</Text>
+          <Text>A classificação dele é:  {classificacao}</Text>
         </View>
       )}
     </View>
